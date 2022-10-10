@@ -6,9 +6,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const MongoClient = require('mongodb').MongoClient;
 
 var db;
-MongoClient.connect('mongodb+srv://rlaqorrb:rlatpdms0911@cluster0.hrzuyuj.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (에러, client) {
+MongoClient.connect('mongodb+srv://rlaqorrb:rlatpdms0911@cluster0.hrzuyuj.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true }, function (err, client) {
 
-  if (에러) return console.log(에러)
+  if (err) return console.log(err)
   db = client.db('todoapp');
 
   db.collection('post').insertOne({ 이름: 'John', _id : 100}, function (에러, 결과) {
