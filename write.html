@@ -5,6 +5,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="index.css">
+  <!-- <link rel="stylesheet" href="write.css"> -->
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -19,41 +21,42 @@
 
 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Todo App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/write">Write</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Undefined</a>
-        </li>
-    </div>
-  </nav>
-
+  
   <div class="container">
-    <form action="/add" method="POST">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="#">Todo App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/write">Write<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Undefined</a>
+          </li>
+      </div>
+    </nav>
+
+
+    <form action="/add" method="POST" class="write-form">
       <div class="form-group">
         <label for="todo">할일</label>
         <input type="text" class="form-control" id="todo" autocomplete="off" name="title">
       </div>
       <div class="form-group">
         <label for="date">Due date</label>
-        <input type="datetime" class="form-control" id="date" autocomplete="off" name="date">
+        <input type="date" class="form-control" id="date" autocomplete="off" name="date">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-
 
 
 
