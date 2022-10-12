@@ -57,12 +57,17 @@ app.get('/write.css', (req, res) => {
 
 app.get('/list', (req, res) => {
   db.collection('post').find().toArray((err, result) => {
-    console.log(result);
+    // console.log(result);
     res.render('list.ejs', { posts: result });
   });
 });
 
 app.delete('/delete', (req, res) => {
   console.log(req.body);
+  req.body.게시물번호 = parseInt(req.body.게시물번호);
+  console.log(req.body.게시물번호);
+  db.collection('post').deleteOne(req.body , function(err, result){
+    console.log('삭제완료');
+  });
 });
 
