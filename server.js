@@ -27,7 +27,10 @@ MongoClient.connect('mongodb+srv://rlaqorrb:rlatpdms0911@cluster0.hrzuyuj.mongod
         }) // $set : 변경, $inc : 증가, 
       });
     });
-    res.redirect('/list');
+    setTimeout(function(){
+      res.redirect('/list');
+      // console.log(`req : ${req.body}`);
+    }, 10) // 서버에 post요청을 보내고 난 후 바로 리다이랙트 하면 추가된 데이터가 불러와지지 않음. 따라서 최소 6ms의 시간 간격을 두고 리다이랙트를 한다. 혹시 모를 상황을 대비하여 넉넉하게 10ms의 간격을 두고 리다이랙트를 한다.
   });
 
 
@@ -57,7 +60,7 @@ app.get('/write.css', (req, res) => {
 
 app.get('/list', (req, res) => {
   db.collection('post').find().toArray((err, result) => {
-    // console.log(result);
+    // console.log(`result : ${result}`);
     res.render('list.ejs', { posts: result });
   });
 });
