@@ -73,7 +73,18 @@ app.get('/list', (req, res) => {
 
 app.get('/search', (req, res) => {
   console.log(req.query.value);
-  db.collection('post').find({$text : {$search: req.query.value}}).toArray((err, result) => {
+  var 검색조건 = [
+    {
+      $search: {
+        index: 'titleSearch',
+        text: {
+          query: req.query.value,
+          path: '제목'  // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
+        }
+      }
+    }
+  ]
+  db.collection('post').aggregate(검색조건).toArray((err, result) => {
     console.log(result);
     res.render('search.ejs', {posts : result});
   })
