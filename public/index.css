@@ -10,14 +10,22 @@ body{
   overflow-x: hidden;
 }
 
+.list-item a{
+  color: black;
+  font-size: 24px;
+}
+.list-item a:hover{
+  color: black;
+
+}
+
 .container h4{
   text-align: center;
 }
 
 
 .container{
-  background-color: rgba(33, 37, 41, 1);
-  color: white;
+  color: black;
   min-width: 100%;
   min-height: 100vh;
   padding: 0;
@@ -53,16 +61,30 @@ body{
   margin-top: 50px;
 }
 
+
+
+.container > .list:first-child{
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+}
+.container > .list:last-child{
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 .list{
   max-width: 1300px;
+  width: 70%;
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
-  border-bottom: 1px solid gray;
-  padding: 40px 50px 40px 50px;
+  border: 1px solid gray;
+  border-bottom: none;
+  padding: 40px 50px 20px 50px;
   display: flex;
   justify-content: space-between;
-
 }
 
 .list h4{
@@ -117,4 +139,26 @@ body{
 .show{
   visibility: visible;
   opacity: 1;
+}
+
+.card{
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 40px;
+}
+
+.card-body{
+  color: black;
+}
+
+.memo{
+  display: block;
+  width: 100%;
+}
+
+.search{
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
 }
