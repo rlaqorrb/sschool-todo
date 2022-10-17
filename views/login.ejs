@@ -23,21 +23,56 @@
 
   
   <div class="container">
-    <%- include('nav.html') %>
+    <%- include('nav.ejs') %>
 
 
 
-    <form action="/login" method="POST" class="write-form">
+    <form action="/login" method="POST" class="write-form" id="loginForm">
       <div class="form-group">
-        <label for="todo">아이디</label>
-        <input type="text" class="form-control" id="todo" autocomplete="off" name="id">
+        <label for="id">아이디</label>
+        <input type="text" class="form-control" id="id" autocomplete="off" name="id">
       </div>
       <div class="form-group">
-        <label for="date">비밀번호</label>
-        <input type="text" class="form-control" id="date" autocomplete="off" name="pw">
+        <label for="pw">비밀번호</label>
+        <input type="text" class="form-control" id="pw" autocomplete="off" name="pw">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">로그인</button>
     </form>
+
+    <script>
+      $('.loginForm').on('submit', function(e){
+        var idVal = $('#id').val();
+        var pwVal = $('#pw').val();
+        if(idVal == '' || pwVal == ''){
+          e.preventDefault();
+          alert('id or pw error')
+        }
+      })
+    </script>
+
+    <form action="/register" method="POST" class="write-form" id="regForm">
+      <div class="form-group">
+        <label for="regId">아이디</label>
+        <input type="text" class="form-control" id="regId" autocomplete="off" name="id">
+      </div>
+      <div class="form-group">
+        <label for="regPw">비밀번호</label>
+        <input type="text" class="form-control" id="regPw" autocomplete="off" name="pw">
+      </div>
+      <button type="submit" class="btn btn-primary">가입</button>
+    </form>
+    <script>
+      $('#regForm').submit(function(e){
+        var idVal = $('#regId').val();
+        var pwVal = $('#regPw').val();
+        console.log(idVal);
+        console.log(pwVal);
+        if(idVal == '' || pwVal == ''){
+          e.preventDefault();
+          alert('id or pw error');
+        }
+      })
+    </script>
   </div>
 
 
