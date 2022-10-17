@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
   <title>todo</title>
 </head>
 
@@ -34,21 +36,11 @@
       </div>
       <div class="form-group">
         <label for="pw">비밀번호</label>
-        <input type="text" class="form-control" id="pw" autocomplete="off" name="pw">
+        <input type="password" class="form-control" id="pw" autocomplete="off" name="pw">
       </div>
       <button type="submit" class="btn btn-primary">로그인</button>
     </form>
 
-    <script>
-      $('.loginForm').on('submit', function(e){
-        var idVal = $('#id').val();
-        var pwVal = $('#pw').val();
-        if(idVal == '' || pwVal == ''){
-          e.preventDefault();
-          alert('id or pw error')
-        }
-      })
-    </script>
 
     <form action="/register" method="POST" class="write-form" id="regForm">
       <div class="form-group">
@@ -57,31 +49,37 @@
       </div>
       <div class="form-group">
         <label for="regPw">비밀번호</label>
-        <input type="text" class="form-control" id="regPw" autocomplete="off" name="pw">
+        <input type="password" class="form-control" id="regPw" autocomplete="off" name="pw">
       </div>
       <button type="submit" class="btn btn-primary">가입</button>
     </form>
-    <script>
-      $('#regForm').submit(function(e){
-        var idVal = $('#regId').val();
-        var pwVal = $('#regPw').val();
-        console.log(idVal);
-        console.log(pwVal);
-        if(idVal == '' || pwVal == ''){
-          e.preventDefault();
-          alert('id or pw error');
-        }
-      })
-    </script>
   </div>
 
 
+  <script>
+    $('#loginForm').on('submit', function(e){
+      var logId = $('#id').val();
+      var logPw = $('#pw').val();
+      if(logId == '' || logPw == ''){
+        e.preventDefault();
+        console.log('err');
+      }
+    })
+    $('#regForm').on('submit', function(e){
+      var logId = $('#regId').val();
+      var logPw = $('#regPw').val();
+      if(logId == '' || logPw == ''){
+        e.preventDefault();
+        console.log('err');
+      }
+    })
+
+
+  </script>
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
     crossorigin="anonymous"></script>
