@@ -17,8 +17,8 @@
         <a class="nav-link" href="/list">List</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/login">
-          <p><%= 'login' ?? user.id %></p>
+        <a class="nav-link" href="<%= user?.id ? '/mypage' : '/login'%>">
+          <%= user?.id ?? 'Login'%>
         </a>
       </li>
   </div>

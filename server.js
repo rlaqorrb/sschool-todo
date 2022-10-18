@@ -20,8 +20,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/login', (req, res) => {
-  res.render('login.ejs');
+app.get('/login', checkIn,(req, res) => {
+  res.render('login.ejs', {user : req.user});
 })
 
 app.post('/login', passport.authenticate('local', {
@@ -35,20 +35,16 @@ app.get('/mypage', checkLogin, (req, res) =>{
   res.render('mypage.ejs', {user : req.user});
 })
 
-app.get('/', checkLogin,(req, res) => {
+app.get('/', checkIn,(req, res) => {
   res.render('index.ejs', {user : req.user});
   console.log(req.user);
 });
 
 function checkIn(req, res, next){
-  if(req.user){
     next();
-  } else {
-    res.send('로그인 하셈')
-  }
 }
 
-app.get('/nav.ejs', checkLogin, (req, res) => {
+app.get('/nav.ejs', checkIn, (req, res) => {
   res.render('nav.ejs', {user : req.user});
 })
 
@@ -135,8 +131,8 @@ MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (
 
 
 
-app.get('/write', (req, res) => {
-  res.render('write.ejs');
+app.get('/write', checkLogin,(req, res) => {
+  res.render('write.ejs', {user : req.user});
 });
 
 app.get('/index.css', (req, res) => {
@@ -146,18 +142,18 @@ app.get('/detail/index.css', (req, res) => {
   res.sendFile(__dirname + '/public/index.css');
 });
 
-app.get('/write.css', (req, res) => {
+app.get('/write.css', checkLogin,(req, res) => {
   res.sendFile(__dirname + '/public/write.css');
 });
 
-app.get('/list', (req, res) => {
+app.get('/list', checkLogin,(req, res) => {
   db.collection('post').find().toArray((err, result) => {
     // console.log(`result : ${result}`);
-    res.render('list.ejs', { posts: result });
+    res.render('list.ejs', { posts: result, user : req.user });
   });
 });
 
-app.get('/search', (req, res) => {
+app.get('/search', checkLogin,(req, res) => {
   console.log(req.query.value);
   var 검색조건 = [
     {
@@ -182,24 +178,24 @@ app.get('/search', (req, res) => {
 
 
 // 상세페이지
-app.get('/detail/:id', function(req, res){
+app.get('/detail/:id', checkLogin,function(req, res){
   db.collection('post').findOne({게시물번호 : parseInt(req.params.id)}, function(err, result){
     if(result){
-      res.render('detail.ejs', {data : result});
+      res.render('detail.ejs', {data : result, user : req.user});
     } else {
-      res.render('detailErr.ejs')
+      res.render('detailErr.ejs', {user : req.user})
     }
     console.log(result);
 
   })
 })
 
-app.get('/edit/:id', function(req, res){
+app.get('/edit/:id', checkLogin,function(req, res){
   db.collection('post').findOne({게시물번호 : parseInt(req.params.id)}, function(err, result){
     if(result){
       res.render('edit.ejs', {data : result });
     } else {
-      res.render('detailErr.ejs')
+      res.render('detailErr.ejs', {user : req.user})
     }
   })
 })
@@ -236,6 +232,6 @@ function checkLogin(req, res, next){
   if(req.user){
     next();
   } else {
-    res.send('로그인')
+    res.redirect('/login')
   }
 }

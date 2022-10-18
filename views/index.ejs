@@ -12,6 +12,7 @@
 
   <title>todo</title>
   <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/6e4abe1f96.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,9 +27,11 @@
 
     <div class="title-box">
       <h2>ToDo App Home</h2>
-      <h2><%= user?.id ?? 'Login' %></h2>
+      <h2><%= user?.id ? 'Hi ' + user?.id : 'Login PLZ' %></h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet veniam iusto voluptatibus quo adipisci iste quia exercitationem ipsam sapiente alias laborum quisquam culpa, ullam rem corrupti, quam accusantium possimus iure. </p>
-      <a href="/write" class="btn btn-light main-btn">Learn More</a>
+      <a href="/write" class="btn btn-light main-btn">
+        <%= user?.id ? 'Write' : 'Login' %>
+      </a>
     </div>
 
 
