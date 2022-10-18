@@ -35,10 +35,18 @@ app.get('/mypage', checkLogin, (req, res) =>{
   res.render('mypage.ejs', {user : req.user});
 })
 
-app.get('/', (req, res) => {
-  res.render('index.ejs');
+app.get('/', checkLogin,(req, res) => {
+  res.render('index.ejs', {user : req.user});
   console.log(req.user);
 });
+
+function checkIn(req, res, next){
+  if(req.user){
+    next();
+  } else {
+    res.send('로그인 하셈')
+  }
+}
 
 app.get('/nav.ejs', checkLogin, (req, res) => {
   res.render('nav.ejs', {user : req.user});
@@ -228,6 +236,6 @@ function checkLogin(req, res, next){
   if(req.user){
     next();
   } else {
-    res.send('로그인 하셈')
+    res.send('로그인')
   }
 }
