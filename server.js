@@ -20,15 +20,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/login', checkIn,(req, res) => {
-  res.render('login.ejs', {user : req.user});
-})
 
-app.post('/login', passport.authenticate('local', {
-  failureRedirect : '/fail'
-}),(req, res) => {
-  res.redirect('/');
-})
 
 app.get('/mypage', checkLogin, (req, res) =>{
   console.log(req.user);
@@ -48,6 +40,16 @@ app.get('/nav.ejs', checkIn, (req, res) => {
   res.render('nav.ejs', {user : req.user});
 })
 
+app.get('/login', checkIn,(req, res) => {
+  res.render('login.ejs', {user : req.user});
+})
+
+app.post('/login', passport.authenticate('local', {
+  failureRedirect : '/fail'
+}),(req, res) => {
+  res.redirect('/');
+})
+
 passport.use(new LocalStrategy({
   usernameField: 'id',
   passwordField: 'pw',
@@ -58,11 +60,11 @@ passport.use(new LocalStrategy({
   db.collection('login').findOne({ id: 입력한아이디 }, function (에러, 결과) {
     if (에러) return done(에러)
 
-    if (!결과) return done(null, false, { message: '존재하지않는 아이디요' })
+    if (!결과) return done(null, false, { message: '존재하지않는 아이디' })
     if (입력한비번 == 결과.pw) {
       return done(null, 결과)
     } else {
-      return done(null, false, { message: '비번틀렸어요' })
+      return done(null, false, { message: '틀린 비밀번호' })
     }
   })
 }));
@@ -77,7 +79,7 @@ passport.deserializeUser(function(id, done){
 })
 
 app.get('/fail', function(req, res){
-  res.render('fail.ejs');
+  res.render('fail.ejs', {user : req.user});
 })
 
 app.post('/register', function(req, res){
@@ -171,7 +173,7 @@ app.get('/search', checkLogin,(req, res) => {
   ]
   db.collection('post').aggregate(검색조건).toArray((err, result) => {
     console.log(result);
-    res.render('search.ejs', {posts : result});
+    res.render('search.ejs', {posts : result, user : req.user});
   })
 
 })
@@ -193,7 +195,7 @@ app.get('/detail/:id', checkLogin,function(req, res){
 app.get('/edit/:id', checkLogin,function(req, res){
   db.collection('post').findOne({게시물번호 : parseInt(req.params.id)}, function(err, result){
     if(result){
-      res.render('edit.ejs', {data : result });
+      res.render('edit.ejs', {data : result, user : req.user });
     } else {
       res.render('detailErr.ejs', {user : req.user})
     }
@@ -235,3 +237,4 @@ function checkLogin(req, res, next){
     res.redirect('/login')
   }
 }
+
