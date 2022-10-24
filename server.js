@@ -84,7 +84,7 @@ app.get('/fail', function(req, res){
 
 app.post('/register', function(req, res){
   db.collection('login').findOne({id: req.body.id}, function(err, result){
-    if(req.body.id == result?.id){
+    if(req.body.id == result.id){
       res.redirect('/fail');
     } else {
       db.collection('login').insertOne({id : req.body.id, pw : req.body.pw}, function(err, result){
